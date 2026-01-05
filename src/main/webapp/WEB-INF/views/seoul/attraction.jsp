@@ -72,6 +72,11 @@
             			<tr>
             				<td>${vo.avo.msg }</td>
             			</tr>
+            			<tr>
+            				<td	class="text-right">
+            					<a href="javascript:history.back()" class="btn btn-sm btn-danger">목록</a>
+            				</td>
+            			</tr>
             		</tbody>
             	</table>
             </div>
