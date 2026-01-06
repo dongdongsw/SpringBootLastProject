@@ -31,7 +31,17 @@ import com.sist.web.vo.SeoulVO;
  */
 
 public interface SeoulService {
+	// 일반 리스트 
 	public List<SeoulVO> seoulListData(Map map);
 	public int seoulLocationTotalPage(int contenttype);
+	
+	// 디테일
 	public SeoulVO seoulAttractionDetailData(int contentid);
+	
+	// 검색
+	public List<SeoulVO> seoulFindData(Map map);
+	public int seoulFindTotalPage(String address);
+	
+	// top4 (메인페이지)
+	public List<SeoulVO> seoulTop5Data();
 }

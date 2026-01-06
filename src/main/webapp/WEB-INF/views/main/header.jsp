@@ -109,6 +109,14 @@
                                     </div>
                                 </li>
                                 <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" href="#" id="yummyDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">검색</a>
+                                    <div class="dropdown-menu" aria-labelledby="yummyDropdown">
+                                        <a class="dropdown-item" href="/seoul/find">서울 여행 검색</a>
+                                        <a class="dropdown-item" href="/busan/find">부산 여행 검색</a>
+                                        <a class="dropdown-item" href="/jeju/find">제주 여행 검색</a>
+                                    </div>
+                                </li>
+                                <li class="nav-item dropdown">
                                     <a class="nav-link dropdown-toggle" href="#" id="yummyDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">전국맛집</a>
                                     <div class="dropdown-menu" aria-labelledby="yummyDropdown">
                                         <a class="dropdown-item" href="/main">한식</a>
