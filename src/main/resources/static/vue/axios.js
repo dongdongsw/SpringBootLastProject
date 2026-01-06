@@ -7,6 +7,6 @@
 
 */
 const api = axios.create({
-	baseURL: 'http://http://13.125.246.116:8080/',
+	baseURL: 'http://13.125.246.116:8080/',
 	timeout: 50000
 })
