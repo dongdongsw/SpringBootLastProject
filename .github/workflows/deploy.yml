@@ -50,6 +50,7 @@ jobs:
 
     - name: Run SSH commands
       run: |
-        ssh -i ~/.ssh/id_rsa ubuntu@13.125.128.38 << "EOF"
+        ssh -i ~/.ssh/id_rsa ubuntu@13.125.128.38 << 'EOF'
           pkill -f 'java -jar' || true
-          nohup java -jar ~/app/SpringBootLastProject-0.0.1-SNAPSHOT.war > log.txt > &1 &EOF
+          nohup java -jar ~/app/SpringBootLastProject-0.0.1-SNAPSHOT.war > log.txt 2>&1 &
+        EOF
