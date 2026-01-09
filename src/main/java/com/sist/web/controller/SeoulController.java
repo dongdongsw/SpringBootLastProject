@@ -139,7 +139,7 @@ public class SeoulController {
 			jsp = "../seoul/culture.jsp";
 		}
 		else if(contenttype == 15) {
-			SeoulVO vo = sService.seoulAttractionDetailData(contentid);
+			SeoulVO vo = sService.seoulFestivalDetailData(contentid);
 			model.addAttribute("vo",vo);
 			jsp = "../seoul/festival.jsp";
 		}

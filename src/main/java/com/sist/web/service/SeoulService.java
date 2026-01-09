@@ -44,4 +44,6 @@ public interface SeoulService {
 	
 	// top4 (메인페이지)
 	public List<SeoulVO> seoulTop5Data();
+	
+	public SeoulVO seoulFestivalDetailData(int contentid);
 }

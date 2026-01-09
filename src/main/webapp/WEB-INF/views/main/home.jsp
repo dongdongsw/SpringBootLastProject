@@ -106,7 +106,7 @@
 	                            <div class="single-post wow fadeInUp" data-wow-delay="1s">
 	                                <!-- Post Thumb -->
 	                                <div class="post-thumb">
-	                                    <img src="${vo.image1 }" alt="">
+	                                    <img src="${vo.image1 }" alt="" style="width: 349px; height:262px; ">
 	                                </div>
 	                                <!-- Post Content -->
 	                                <div class="post-content">

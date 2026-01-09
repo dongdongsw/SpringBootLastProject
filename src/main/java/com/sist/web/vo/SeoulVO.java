@@ -22,4 +22,7 @@ public class SeoulVO {
 	private double x,y;
 	
 	private AttractionVO avo = new AttractionVO();
+	private FoodStoreVO fsvo = new FoodStoreVO();
+	private FestivalVO fvo = new FestivalVO();
+	private SteyVO svo = new SteyVO();
 }
