@@ -153,7 +153,7 @@
                                 <li class="nav-item dropdown">
                                     <a class="nav-link dropdown-toggle" href="#" id="yummyDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">커뮤니티</a>
                                     <div class="dropdown-menu" aria-labelledby="yummyDropdown">
-                                        <a class="dropdown-item" href="/main">자유게시판</a>
+                                        <a class="dropdown-item" href="/board/list">자유게시판</a>
                                         <a class="dropdown-item" href="archive.html">공지사항</a>
                                         <a class="dropdown-item" href="single.html">일대일 채팅</a>
                                         <a class="dropdown-item" href="single.html">그룹 채팅</a>
