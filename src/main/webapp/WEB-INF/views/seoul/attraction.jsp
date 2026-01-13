@@ -5,6 +5,16 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link rel="stylesheet" href="/css/map.css">
+<style type="text/css">
+.a-btn{
+	cursor: pointer;
+}
+</style>
+<script>
+	const SESSION_ID = '${sessionScope.userid}'
+	const CNO = '${param.contentid}'
+</script>
 </head>
 <body>
 	<!-- ****** Breadcumb Area Start ****** -->
@@ -79,8 +89,144 @@
             			</tr>
             		</tbody>
             	</table>
+            	<table class="table">
+            		<tbody>
+            			<tr>
+            				<td class="text-center">
+            					<div class="map_wrap">
+								    <div id="map" style="width:100%;height:100%;position:relative;overflow:hidden;"></div>
+								
+								    <div id="menu_wrap" class="bg_white">
+								        <div class="option">
+								            <div>
+								                <form onsubmit="searchPlaces(); return false;">
+								                    키워드 : <input type="text" value="${addr} 맛집" id="keyword" size="15"> 
+								                    <button type="submit">검색하기</button> 
+								                </form>
+								            </div>
+								        </div>
+								        <hr>
+								        <ul id="placesList"></ul>
+								        <div id="pagination"></div>
+								    </div>
+								</div>
+            				</td>
+            			</tr>
+            		</tbody>
+            	</table>
+            	<div id = "comment">
+                            <div class="comment_area section_padding_50 clearfix">
+                                <h4 class="mb-30">댓글([[store.count]])</h4>
+
+                                <ol>
+                                    <!-- Single Comment Area -->
+                                    <li class="single_comment_area" v-for="rvo in store.list" >
+                                        <div class="comment-wrapper d-flex">
+                                            <!-- Comment Meta -->
+                                            <div class="comment-author">
+                                                <img src="/img/man.png" v-if="rvo.sex === '남자'">
+                                                <img src="/img/woman.png" v-else>
+                                            </div>
+                                            <!-- Comment Content -->
+                                            <div class="comment-content">
+                                                <span class="comment-date text-muted">[[rvo.dbday]]</span>
+                                                <h5>[[rvo.name]]</h5>
+                                                <p>[[rvo.msg]]</p>
+                                                <a v-if="store.sessionId===rvo.id" >[[store.upReplyNo === rvo.no?'취소':'수정']]</a>
+                                                <a class="a-btn" v-if="store.sessionId===rvo.id" @click="store.commonsDelete(rvo.no)">삭제</a>
+                                                <a class="a-btn" v-if="store.sessionId===rvo.id">댓글</a>
+                                                <div class="comment-form" v-if="store.upReplyNo === rvo.no">
+                                   
+				                                   <form action="#" method="post" style="margin-top: 5px;">
+				                            
+				                                       
+				                                           <textarea  cols="50" rows="4" ref="msgRef" v-model="store.updateMsg[rvo.no]" placeholder="Message" style="float: left;display: inline-block;"></textarea>
+				                                           <button type="button" class="btn-primary" style="float: left;width: 80px;height: 100px;display: inline-block;"  >댓글수정</button>
+				                                       
+				                                       
+				                                   </form>
+				                               </div>
+                                            </div>
+                                        </div>
+			                               
+                                    </li>
+                                </ol>
+                            </div>
+
+                            <!-- Leave A Comment -->
+                            <div class="leave-comment-area section_padding_50 clearfix" v-if="store.sessionId!==''">
+                                <div class="comment-form">
+                                   
+                                    <form action="#" method="post" >
+                             
+                                        
+                                            <textarea  cols="95" rows="5" ref="msgRef" v-model="store.msg" placeholder="Message" style="float: left;display: inline-block;"></textarea>
+                                            <button type="button" class="btn-primary" style="float: left;width: 80px;height: 100px;display: inline-block;" @click="store.commonsInsert(msgRef)">댓글쓰기</button>
+                                        
+                                        
+                                    </form>
+                                </div>
+                            </div>
+                             <div class="col-12">
+		                    <div class="pagination-area d-sm-flex mt-15">
+		                        <nav aria-label="#">
+		                            <ul class="pagination">
+		                            	
+			                                <li class="page-item" v-if="store.startPage > 1">
+			                                    <a class="page-link" @click="store.movePage(store.startPage - 1)" >이전 <i class="fa fa-angle-double-left" aria-hidden="true"></i></a>
+			                                </li>
+		                                
+		                                
+		                                	<li v-for="i in store.range" :class="i===store.curpage?'page-item active':'page-item'">
+		                                		<a class="page-link" @click="store.movePage(i)">[[i]]</a>
+		                               		</li>
+		                                
+		                                
+			                                <li class="page-item" v-if="store.endPage < store.totalpage">
+			                                    <a class="page-link" @click="store.movePage(store.endPage + 1)">다음 <i class="fa fa-angle-double-right" aria-hidden="true"></i></a>
+			                                </li>
+		                                
+		                            </ul>
+		                        </nav>
+		                        <div class="page-status">
+		                            <p>[[store.curpage]] page / [[store.totalpage]] pages</p>
+		                        </div>
+		                    </div>
+		                </div>
+					</div>
+					
             </div>
         </div>
     </section>
+    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=eceae8f48d6cfa28f55de551f70f135b&libraries=services"></script>
+    <script type="text/javascript" src="/vue/map.js"></script>
+    <script src="/vue/axios.js"></script>
+	<script src="/vue/reply/commonsReplyStore.js"></script>
+	<script>
+		const {createApp, onMounted, ref} = Vue
+		const {createPinia} = Pinia
+		
+		const commonsApp = createApp({
+			 delimiters: ['[[', ']]'],
+			setup(){
+				
+				const store =  useCommonsReplyStore()
+				const msgRef = ref(null)
+				
+				onMounted(()=>{
+					store.sessionId = SESSION_ID
+					store.commonsListData(CNO)
+				})
+				
+				return{
+					store,
+					msgRef
+				}
+			}
+		})
+		commonsApp.use(createPinia())
+		commonsApp.mount("#comment")
+		
+	</script>
 </body>
 </html>

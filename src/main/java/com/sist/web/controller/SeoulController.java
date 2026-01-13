@@ -130,6 +130,8 @@ public class SeoulController {
 		String jsp = "";
 		if(contenttype == 12) {
 			SeoulVO vo = sService.seoulAttractionDetailData(contentid);
+			String[] addr = vo.getAddress().split(" ");
+			model.addAttribute("addr" , addr[1].trim());
 			model.addAttribute("vo",vo);
 			jsp = "../seoul/attraction.jsp";
 		}

@@ -5,61 +5,72 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.sist.web.service.BoardReplyService;
-import com.sist.web.service.BoardService;
-import com.sist.web.vo.BoardReplyVO;
+import com.sist.web.service.CommonsReplyService;
+import com.sist.web.vo.CommonsReplyVO;
 
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 
 @RestController
 @RequiredArgsConstructor
-public class BoardReplyRestController {
+public class CommonsReplyRestController {
 
-	private final BoardReplyService bService;
-	
-	public Map commonsData(int bno) {
+	private final CommonsReplyService cService;
+	public Map CommonsData(int page, int cno) {
+		
 		Map map = new HashMap<>();
-		List<BoardReplyVO> list = bService.boardReplyListData(bno);
-		int count = bService.boardReplyCount(bno);
+		
+		List<CommonsReplyVO> list = cService.commonsReplyListData(cno, (page-1)*10);
+		int totalpage = cService.commonsReplyTotalPage(cno);
+
+		final int BLOCK = 5;
+		int startPage = ((page-1)/BLOCK*BLOCK) + 1;
+		int endPage = ((page-1)/BLOCK*BLOCK) + BLOCK;
+		
+		if(endPage > totalpage) {
+			endPage = totalpage;
+		}
 		
 		map.put("list", list);
-		map.put("count",count);
+		map.put("totalpage", totalpage);
+		map.put("startPage", startPage);
+		map.put("endPage", endPage);
+		map.put("curpage", page);
+		map.put("cno", cno);
+		map.put("count", list.size());
 		
 		return map;
 	}
-	
-	@GetMapping("/reply/list_vue/")
-	public ResponseEntity<Map> reply_list_vue(@RequestParam("bno") int bno){
+	/*
+	 * private String[] tbl_name= {"", "seoultravel", "busantravel", "jejutravel"};
+	 */
 
+	@GetMapping("/commons/list_vue/")
+	public ResponseEntity<Map> commons_list_vue(@RequestParam("page") int page, @RequestParam("cno") int cno){
 		Map map = new HashMap<>();
-		
 		try {
-			map = commonsData(bno);
+			
+			map = CommonsData(page,cno);
 			
 		} catch (Exception ex) {
+			ex.printStackTrace();
 			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
-		
 		return ResponseEntity.ok(map);
-		
 	}
 	
-	@PostMapping("/reply/insert_vue/")
-	public ResponseEntity<Map> reply_insert_vue(@RequestBody BoardReplyVO vo, HttpSession session){
+	@PostMapping("/commons/insert_vue/")
+	public ResponseEntity<Map> commons_insert_vue(@RequestBody CommonsReplyVO vo, HttpSession session ){
 		
 		Map map = new HashMap<>();
-		
 		try {
 			String id = (String)session.getAttribute("userid");
 			String name = (String)session.getAttribute("username");
@@ -68,43 +79,28 @@ public class BoardReplyRestController {
 			vo.setName(name);
 			vo.setSex(sex);
 			
-			bService.boardReplyInsert(vo);
+			cService.commonsReplyInsert(vo);
 			
-			map = commonsData(vo.getBno());
-			
-			
-		} catch (Exception ex) {
-			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
-		}
-		
-		return ResponseEntity.ok(map);
-		
-	}
-	
-	@DeleteMapping("/reply/delete_vue/")
-	public ResponseEntity<Map> reply_delete_vue(@RequestParam("no") int no, @RequestParam("bno") int bno){
-		
-		Map map = new HashMap<>();
-		
-		try {
-			bService.boardReplyDelete(no);
-			map = commonsData(bno);
+			map = CommonsData(vo.getPage(),vo.getCno());
 			
 		} catch (Exception ex) {
+			ex.printStackTrace();
 			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 		
 		return ResponseEntity.ok(map);
 	}
 	
-	@PutMapping("/reply/update_vue/")
-	public ResponseEntity<Map> reply_update_vue(@RequestBody BoardReplyVO vo){
+	@DeleteMapping("/commons/delete_vue/")
+	public ResponseEntity<Map> commons_delete_vue(@RequestParam("page") int page, 
+			@RequestParam("cno") int cno, @RequestParam("no") int no){
 		
 		Map map = new HashMap<>();
 		try {
 			
-			bService.boardReplyUpdate(vo);
-			map = commonsData(vo.getBno());
+			cService.commonsDelete(no);
+			
+			map = CommonsData(page,cno);
 			
 		} catch (Exception ex) {
 			ex.printStackTrace();
