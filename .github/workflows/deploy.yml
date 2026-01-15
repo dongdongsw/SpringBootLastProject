@@ -49,5 +49,5 @@ jobs:
             sudo docker stop spring-boot-app || true
             sudo docker rm spring-boot-app || true
             sudo docker pull ${{ secrets.DOCKERHUB_USERNAME }}/spring-boot-app:latest
-            sudo docker run -d --name spring-boot-app -p 8080:8080 ${{ secrets.DOCKERHUB_USERNAME }}/spring-boot-app:latest
+            sudo docker run -d --name spring-boot-app --restart always -p 8080:8080 ${{ secrets.DOCKERHUB_USERNAME }}/spring-boot-app:latest
           EOF
