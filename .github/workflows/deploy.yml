@@ -49,6 +49,5 @@ jobs:
             docker stop spring-boot-app || true
             docker rm spring-boot-app || true
             docker pull ${{ secrets.DOCKERHUB_USERNAME }}/spring-boot-app:latest
-            docker run -d --name spring-boot-app -p 8080:8080 \
-              ${{ secrets.DOCKERHUB_USERNAME }}/spring-boot-app:latest
+            docker run -d --name spring-boot-app -p 8080:8080 ${{ secrets.DOCKERHUB_USERNAME }}/spring-boot-app:latest
           EOF
