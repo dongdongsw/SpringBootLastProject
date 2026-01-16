@@ -2,11 +2,17 @@
 FROM eclipse-temurin:17-jdk-alpine AS build
 WORKDIR /app 
 
-# copy
-COPY gradle .
+# Gradle Wrapper 복사
+COPY gradlew ./
 COPY gradle gradle
+
+# 실행 권한 부여
+RUN chmod +x gradlew
+
+# Gradle 설정 파일
 COPY build.gradle settings.gradle ./
-RUN chmod +x ./gradlew 
+
+# 의존성 다운로드
 RUN ./gradlew dependencies --no-daemon
 
 # 소스
