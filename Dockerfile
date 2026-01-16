@@ -19,7 +19,7 @@ FROM eclipse-temurin:17-jdk-alpine
 WORKDIR /app
 
 #빌드된 jar 파일 복사
-COPY --from=build build/libs/*-0.0.1-SNAPSHOT.war app.war
+COPY --from=build /app/build/libs/*-0.0.1-SNAPSHOT.war app.war
 
 #PORT 열기
 EXPOSE 8080
