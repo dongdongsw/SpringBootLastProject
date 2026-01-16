@@ -42,11 +42,11 @@ jobs:
       - name: Add known_hosts
         run: |
           mkdir -p ~/.ssh
-          ssh-keyscan -H 3.39.194.62 >> ~/.ssh/known_hosts
+          ssh-keyscan -H 54.180.87.129 >> ~/.ssh/known_hosts
 
       - name: Deploy on Server
         run: |
-          ssh ubuntu@3.39.194.62 << 'EOF'
+          ssh ubuntu@54.180.87.129 << 'EOF'
             sudo docker stop spring-boot-app || true
             sudo docker rm spring-boot-app || true
             sudo docker pull ${{ secrets.DOCKERHUB_USERNAME }}/spring-boot-app:latest
