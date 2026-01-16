@@ -5,8 +5,8 @@ WORKDIR /app
 # copy
 COPY gradle .
 COPY gradle gradle
-COPY build.gradle settings.gradle ./
-RUN sudo chmod +x ./gradlew && ./gradlew dependencies --no-daemon
+COPY gradlew build.gradle settings.gradle ./
+RUN chmod +x ./gradlew && ./gradlew dependencies --no-daemon
 
 # 소스
 COPY src src
