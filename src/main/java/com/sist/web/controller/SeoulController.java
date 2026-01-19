@@ -156,7 +156,9 @@ public class SeoulController {
 			jsp = "../seoul/shopping.jsp";
 		}
 		else if(contenttype == 39) {
-			SeoulVO vo = sService.seoulAttractionDetailData(contentid);
+			SeoulVO vo = sService.seoulFoodStoreDetailData(contentid);
+			String[] addr = vo.getAddress().split(" ");
+			model.addAttribute("addr" , addr[1].trim());
 			model.addAttribute("vo",vo);
 			jsp = "../seoul/food_store.jsp";
 		}

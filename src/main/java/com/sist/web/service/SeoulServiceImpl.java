@@ -58,5 +58,11 @@ public class SeoulServiceImpl implements SeoulService{
 		// TODO Auto-generated method stub
 		return mapper.seoulFestivalDetailData(contentid);
 	}
+
+	@Override
+	public SeoulVO seoulFoodStoreDetailData(int contentid) {
+		// TODO Auto-generated method stub
+		return mapper.seoulFoodStoreDetailData(contentid);
+	}
 	
 }

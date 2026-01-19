@@ -1,0 +1,17 @@
+package com.sist.web.controller;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+
+@Controller
+public class AdminController {
+
+	@GetMapping("/admin/admin_main")
+	public String admin(Model model) {
+		
+		model.addAttribute("admin_jsp", "../admin/admin_home.jsp");
+		model.addAttribute("main_jsp", "../admin/admin_main.jsp");
+		return "main/main";
+	}
+}
