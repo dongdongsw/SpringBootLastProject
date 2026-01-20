@@ -2,7 +2,7 @@ name: Fast Deploy (30s)
 
 on:
   push:
-    branches: [ main ]
+    branches: [ master ]
 
 jobs:
   deploy:
