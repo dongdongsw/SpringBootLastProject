@@ -12,7 +12,7 @@
 			<h3 class="panel-title">개인 정보</h3>
 			<ul class="list-group">
 				<li class="list-group-item">
-					<a href="#">예약 정보</a>
+					<a href="/mypage/mypage_reserve">예약 정보</a>
 				</li>
 				<li class="list-group-item">
 					<a href="#">구매 정보</a>

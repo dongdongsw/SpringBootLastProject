@@ -44,7 +44,7 @@
 				<jsp:include page="../mypage/mypage_menu.jsp"></jsp:include>
 			</div>
 			<div class="col-sm-9">
-				<jsp:include page="../mypage/mypage_home.jsp"></jsp:include>
+				<jsp:include page="${mypage_jsp}"></jsp:include>
 			</div>
 		</div>
 	</section>

@@ -41,7 +41,7 @@
 				<jsp:include page="../admin/admin_menu.jsp"></jsp:include>
 			</div>
 			<div class="col-sm-9">
-				<jsp:include page="../admin/admin_home.jsp"></jsp:include>
+				<jsp:include page="${admin_jsp}"></jsp:include>
 			</div>
 		</div>
 	</section>

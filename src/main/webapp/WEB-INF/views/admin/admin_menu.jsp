@@ -12,7 +12,7 @@
 			<h3 class="panel-title">관리 정보</h3>
 			<ul class="list-group">
 				<li class="list-group-item">
-					<a href="#">예약 관리</a>
+					<a href="/admin/admin_reserve">예약 관리</a>
 				</li>
 				<li class="list-group-item">
 					<a href="#">구매 관리</a>
