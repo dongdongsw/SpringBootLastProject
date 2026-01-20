@@ -1,8 +1,8 @@
 # port => default 8080 => 보안 설정(AWS) : port 허용
 # 8080 / 1521 / 3306 (MySQL, MariaDB)
 # MVC 설정
-server:
-  port: 9090
+#server:
+  #port: 9090
 
 spring:
   mvc:
