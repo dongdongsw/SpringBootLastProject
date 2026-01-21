@@ -39,9 +39,9 @@
             <td class="text-center">{{vo.rinwon}}</td>
             <td class="text-center">{{vo.dbday}}</td>
             <td class="text-center">
-               <button class="btn btn-xs btn-warning" v-if="vo.isreserve===0">승인 대기</button>
-               <span class="btn btn-xs btn-default" v-if="vo.isreserve===1">승인 완료</span>
-               <button class="btn btn-xs btn-danger" v-if="false">취소</button>
+               <button class="btn btn-xs btn-warning" v-if="vo.isreserve===0" @click="store.reserveOk(vo.no, vo.id)">승인 대기</button>
+               <span class="btn btn-xs btn-default" v-else>승인 완료</span>
+               <button class="btn btn-xs btn-danger" style="margin-left: 1px;" v-if="vo.iscancel === 1" @click="store.reserveDelete(vo.no, vo.id)">취소</button>
             </td>            
          </tr>
       </tbody>

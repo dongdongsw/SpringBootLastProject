@@ -19,11 +19,17 @@
     <link href="/style.css" rel="stylesheet">
 
     <!-- Responsive CSS -->
+    
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <link href="/css/responsive/responsive.css" rel="stylesheet">
 	<script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
 	<script src="https://unpkg.com/vue-demi"></script>
 	<script src="https://unpkg.com/pinia@2/dist/pinia.iife.prod.js"></script>
 	<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+	
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/stompjs@2.3.3/lib/stomp.min.js"></script>	
 </head>
 
 <body>
