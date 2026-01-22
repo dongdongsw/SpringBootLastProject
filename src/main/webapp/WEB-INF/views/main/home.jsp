@@ -251,9 +251,11 @@
                         <!-- Single Widget Area -->
                         <div class="single-widget-area newsletter-widget">
                             <div class="widget-title text-center">
-                                <h6>Newsletter</h6>
+                                <h6>실시간 인기 검색어</h6>
                             </div>
-                            <p>Subscribe our newsletter gor get notification about new updates, information discount, etc.</p>
+                            <c:forEach var="rvo" items="${rList }" varStatus="s">
+                            	<p>${s.index + 1}.${rvo.word }</p>
+                            </c:forEach>
                             <div class="newsletter-form">
                                 <form action="#" method="post">
                                     <input type="email" name="newsletter-email" id="email" placeholder="Your email">

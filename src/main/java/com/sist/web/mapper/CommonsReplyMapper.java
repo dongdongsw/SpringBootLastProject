@@ -34,7 +34,7 @@ import com.sist.web.vo.*;
 	+"#{sex},#{msg},(SELECT NVL(MAX(group_id)+1,1) FROM commonsReply_1))")
 	public void commonsReplyInsert(CommonsReplyVO vo);
 	
-	@Select("SELECT root,depth,group_id,group_step FROM commonsReply_1 "
+	@Select("SELECT  root,depth,group_id,group_step FROM commonsReply_1 "
 	+"WHERE no=#{no}")
 	public CommonsReplyVO commonsInfoData(int no);
 	
@@ -54,7 +54,7 @@ import com.sist.web.vo.*;
 	+"WHERE no=#{no}")
 	public void commonsDepthDecrement(int no);
 	  
-	  @Select("SELECT group_id,group_step,group_tab "
+	  @Select("SELECT id, group_id,group_step,group_tab "
 	 +"FROM commonsReply_1 "
 	 +"WHERE no=#{no}")
 	  public CommonsReplyVO commonsReplyParentData(int no);

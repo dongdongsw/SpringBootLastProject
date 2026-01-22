@@ -87,8 +87,9 @@ mapper.commonsMyDelete(no);
 	 */
 	@Transactional(rollbackFor = Exception.class)
 	@Override
-	public void commonsReplyReplyInsert(CommonsReplyVO vo) {
+	public String commonsReplyReplyInsert(CommonsReplyVO vo) {
 		// TODO Auto-generated method stub
+		
 		int pno=vo.getNo();
 		CommonsReplyVO pvo=mapper.commonsReplyParentData(pno);
 		mapper.commonsGroupStepIncrement(pvo);
@@ -99,6 +100,8 @@ mapper.commonsMyDelete(no);
 		
 		mapper.commonsReplyReplyInsert(vo);
 		mapper.commonsDepthIncrement(pno);
+		
+		return pvo.getId();
 	}
 
 

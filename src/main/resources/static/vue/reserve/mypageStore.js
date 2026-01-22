@@ -43,12 +43,6 @@ const useMypageStore = defineStore('mypage',{
 			this.isShow = true
 		},
 		showToast(message){
-			/*document.getElementById("toastMsg").innerText = message
-			const toastEl = document.getElementById("reserveToast")
-			const toast = new bootstrap.Toast(toastEl,{
-				delay:5000
-			})
-			toast.show()*/
 			  const toast = document.getElementById("reserveToast")
 			  const toastMsg = document.getElementById("toastMsg")
 	
